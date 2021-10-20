@@ -2,8 +2,8 @@
 
 class ImageGallery {
     
-    const PATH_IMAGE_PORTFOLIO ="images/index/portfolio";
-    const PATH_IMAGE_GALLERY = "images/index/gallery";    
+    const PATH_IMAGE_PORTFOLIO ="images/index/portfolio/";
+    const PATH_IMAGE_GALLERY = "images/index/gallery/";    
 
     public function getUrlPortfolio(): string {
         return self::PATH_IMAGE_PORTFOLIO.$this->getName();

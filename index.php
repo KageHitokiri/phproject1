@@ -2,7 +2,7 @@
     $title = "Home";
     require_once "./utils/utils.php";
     require_once "./entity/ImageGallery.php";
-    include("./views/index.view.php");    
+    
     
     $gallery[] = new ImageGallery("1.jpg","Sin descripción",1,2,10);
     $gallery[] = new ImageGallery("2.jpg","Sin descripción",1,2,10);
@@ -18,5 +18,5 @@
     $gallery[] = new ImageGallery("12.jpg","Sin descripción",1,2,10);
     
     
-
+    include("./views/index.view.php");    
     
