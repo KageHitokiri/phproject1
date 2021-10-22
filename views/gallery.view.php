@@ -35,6 +35,9 @@
 					</div>
 				</div>
 			</form>
+            </div>
+        </div>
+    </div>
 
 <?php
     include __DIR__. "/partials/footer-doc.part.php";
