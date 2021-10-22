@@ -5,16 +5,17 @@
 ?>
 
 <!-- Principal Content Start -->
-   <div id="gallery">
-   	  <div class="container">
-   	    <div class="col-xs-12 col-sm-8 col-sm-push-2">
-       	   <h1>Galería</h1>
-       	   <hr>
-       	   <p>Aut eaque, laboriosam veritatis, quos non quis ad perspiciatis, totam corporis ea, alias ut unde.</p>
+    <div id="gallery">
+        <div class="container">
+   	        <div class="col-xs-12 col-sm-8 col-sm-push-2">
+            <h1>Galería</h1>
+            <hr>
+            <p>Aut eaque, laboriosam veritatis, quos non quis ad perspiciatis, totam corporis ea, alias ut unde.</p>
 
 			<?php
-				include __DIR__ . "/partials/show-messages.part.php";
+                include __DIR__ . "/partials/show-messages.part.php";
 			?>
+            
             <?php if (("POST" === $_SERVER["REQUEST_METHOD"]) && (empty($errors))):?>
                 <a href="<?=$imgUrl?>" target="_blank">Ver imagen</a>
             <?php endif;?>
