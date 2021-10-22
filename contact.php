@@ -14,15 +14,15 @@
         $message = sanitizeInput($_POST["message"] ?? "");
 
         if (empty($firstName)) {
-            $errors = "El nombre es obligatorio";
+            $errors[] = "El nombre es obligatorio";
             $firstNameError = true;
         }
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            $errors = "Formato de correo electrónico incorrecto";
+            $errors [] = "Formato de correo electrónico incorrecto";
             $emailError = true;
         }
         if (empty($subject)) {
-            $errors = "El asunto es obligatorio";
+            $errors[] = "El asunto es obligatorio";
             $subjectError = true;
         }
         if (sizeof($errors) > 0) {
