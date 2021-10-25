@@ -29,6 +29,9 @@
             <li class="<?=(isActiveMenu("contact")? "active":"");?> lien">            
                 <a href="<?=(isActiveMenu("contact")? "#":"/contact.php");?>">
                 <i class="fa fa-phone-square sr-icons"></i> Contact</a></li>
+            <li class="<?=(isActiveMenu("gallery")? "active":"");?> lien">            
+                <a href="<?=(isActiveMenu("gallery")? "#":"/gallery.php");?>">
+                <i class="fa fa-image sr-icons"></i> Galería</a></li>
           </ul>
        </div>
      </div>
