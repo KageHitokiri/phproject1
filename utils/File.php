@@ -78,6 +78,20 @@ class File {
      * @throws FileException
      */    
      public function saveUploadedFile(string $destPath) {
-        // todo
+        if (false === is_uploaded_file($this->file["tmp_name"])) {
+            throw new FileException("El archivo no ha sido subido desde el formulario pertinente");
+        }
+
+        $path = $destPath.$this->getFileName();
+
+        if (true === is_file($path)) {
+            $uniqueId = time();            
+            $this->fileName = $uniqueId."_".$this->getFileName;
+            $path = $destPath . $this->getFileName;
+        }
+
+        if (false === move_uploaded_file($this->file['tmp_name'],$path)) {
+            throw new FileException("No se puede mover el fichero a su destino");
+        }
     }
 }
