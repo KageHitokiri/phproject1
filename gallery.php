@@ -44,7 +44,7 @@
             }
 
         } else {
-            $errors = "Se ha producido un error. Código de error :".$_FILES['image']['error'];
+            $errors[] = "Se ha producido un error. Código de error :".$_FILES['image']['error'];
             $imageError = true;
         }
 

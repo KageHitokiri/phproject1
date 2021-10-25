@@ -19,4 +19,3 @@ their respective owners.
 http://beauxthemes.com/contact
 
 Known bugs:
-Al enviar una descripción sin imagen da un error
