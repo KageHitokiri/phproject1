@@ -9,7 +9,7 @@ class File {
      * @var string
      */
     private $file;
-    
+
     /**
      * Undocumented variable
      *
@@ -28,7 +28,38 @@ class File {
     private function __construct(string $fileInput,
                                 array $mimeTypes = [],
                                 int $maxSize = 0) {
-        //constructor
+        $this->file = ($_FILES[$fileInput] ?? "");
+
+        if (empty($this->file)) {
+            throw new FileException("Se ha producido un error al procesar el formulario.");            
+        }
+
+        if ($this->file['error'] !== UPLOAD_ERR_OK) {
+            switch ($this->file['error']) {
+                case UPLOAD_ERR_NO_FILE:
+                    throw new FileException("Debe seleccionarse un fichero.");
+                    break;
+                case UPLOAD_ERR_INI_SIZE:
+                case UPLOAD_ERR_FORM_SIZE:
+                    throw new FileException("El fichero es demasiado grande.");
+                    break;
+                case UPLOAD_ERR_PARTIAL:
+                    throw new FileException("No ha sido posible subir el archivo por completo.");
+                    break;
+                default:
+                    throw new FileException("No ha sido posible subir el archivo.");
+            }
+        }
+
+        if (false === in_array($this->file['type'],$mimeTypes)) {
+            throw new FileException("Tipo de archivo incorrecto");            
+        }
+
+        if (($maxSize > 0) && ($this->file['size'] > $maxSize)) {
+            throw new FileException("Eñl archivo es demasiado pesado, no puede superar los $maxSize bytes");
+        }
+
+        $this->fileName = sanitizeInput($this->file["name"]);
     }
 
     /**
