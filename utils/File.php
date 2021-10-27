@@ -25,9 +25,10 @@ class File {
      * @param integer $maxSize
      * @throws FileException
      */
-    private function __construct(string $fileInput,
+    public function __construct(string $fileInput,
                                 array $mimeTypes = [],
                                 int $maxSize = 0) {
+
         $this->file = ($_FILES[$fileInput] ?? "");
 
         if (empty($this->file)) {
@@ -77,7 +78,7 @@ class File {
      * @param string $destPath
      * @throws FileException
      */    
-     public function saveUploadedFile(string $destPath) {
+    public function saveUploadedFile(string $destPath) {
         if (false === is_uploaded_file($this->file["tmp_name"])) {
             throw new FileException("El archivo no ha sido subido desde el formulario pertinente");
         }
@@ -86,8 +87,8 @@ class File {
 
         if (true === is_file($path)) {
             $uniqueId = time();            
-            $this->fileName = $uniqueId."_".$this->getFileName;
-            $path = $destPath . $this->getFileName;
+            $this->fileName = $uniqueId."_".$this->getFileName();
+            $path = $destPath . $this->getFileName();
         }
 
         if (false === move_uploaded_file($this->file['tmp_name'],$path)) {
