@@ -4,15 +4,9 @@ class Associated {
     
     const PATH_IMAGE_ASSOCIATED ="images/index/";
     
-
-    public function getUrlPortfolio(): string {
+    public function getUrlAssociated(){
         return self::PATH_IMAGE_ASSOCIATED.$this->getName();
     }
-
-    public function getUrlGallery(){
-        return self::PATH_IMAGE_ASSOCIATED.$this->getName();
-    }
-
 
     /**
      * @var [string]
@@ -21,19 +15,20 @@ class Associated {
     /**
      * @var [string]
      */
-    private $description;
+    private $logo;        
     /**
      * @var [string]
      */
-    private $logo;        
+    private $description;
+    
 
     public function __construct(string $name, 
-                                string $description,
-                                string $logo)
+                                string $logo,
+                                string $description)
     {
         $this->name = $name;
-        $this->description = $description;
         $this->logo = $logo;
+        $this->description = $description;        
     }
 
     /**
@@ -55,6 +50,26 @@ class Associated {
 
         return $this;
     }
+        /**
+     * Get the value of numVisualizations
+     */ 
+    public function getLogo()
+    {
+        return $this->logo;
+    }
+
+    /**
+     * Set the value of description
+     *
+     * @return  self
+     */ 
+    public function setLogo($logo)
+    {
+        $this->logo = $logo;
+
+        return $this;
+    }
+
     /**
      * Get the value of description
      */ 
@@ -71,25 +86,6 @@ class Associated {
     public function setDescription($description)
     {
         $this->description = $description;
-
-        return $this;
-    }
-    /**
-     * Get the value of numVisualizations
-     */ 
-    public function getLogo()
-    {
-        return $this->logo;
-    }
-
-    /**
-     * Set the value of description
-     *
-     * @return  self
-     */ 
-    public function setLogo($logo)
-    {
-        $this->logo = $logo;
 
         return $this;
     }

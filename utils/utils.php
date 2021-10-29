@@ -25,5 +25,10 @@
         return $data;
     }
 
+    function getAssociateds(array $associateds): array {
+        
+        shuffle($associateds);                
+        return array_slice($associateds,0,3);;
+    }
     
 ?>
