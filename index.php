@@ -17,9 +17,9 @@
     $gallery[] = new ImageGallery("11.jpg","Sin descripción",1,2,10);
     $gallery[] = new ImageGallery("12.jpg","Sin descripción",1,2,10);
     
-    $associateds[] = new Associated("test", "log1.jpg", "prueba");
-    $associateds[] = new Associated("test", "log2.jpg", "prueba");
-    $associateds[] = new Associated("test", "log3.jpg", "prueba");
+    $associateds[] = new Associated("IES El Caminás", "log1.jpg", "prueba");
+    $associateds[] = new Associated("Rompiendo cosas SA(UL)", "log2.jpg", "prueba");
+    $associateds[] = new Associated("The Room of Doom", "log3.jpg", "prueba");
     
     $associateds = getAssociateds($associateds);
 

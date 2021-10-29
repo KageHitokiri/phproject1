@@ -4,16 +4,18 @@
         <div class="partner-box text-center">
           <p>
           <i class="fa fa-map-marker fa-2x sr-icons"></i> 
-          <span class="text-muted">35 North Drive, Adroukpape, PY 88105, Agoe Telessou</span>
+          <span class="text-muted">Calle falsa 123, Aukland (NZ)</span>
           </p>
           <h4>Our Main Partners</h4>
           <hr>
           <div class="text-muted text-left">
+          
             <?php foreach ($associateds as $associated):?>
-                    <ul class='list-inline'>
+                <ul class='list-inline'>
                     <li><img src="<?=$associated->getUrlAssociated()?>" alt="<?=$associated->getDescription()?>"></li>
                     <li><?=$associated->getName()?></li>
-            <?php endforeach;?>
+                </ul>    
+            <?php endforeach;?>            
           </div>
         </div>
     </div>

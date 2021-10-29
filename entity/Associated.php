@@ -5,7 +5,7 @@ class Associated {
     const PATH_IMAGE_ASSOCIATED ="images/index/";
     
     public function getUrlAssociated(){
-        return self::PATH_IMAGE_ASSOCIATED.$this->getName();
+        return self::PATH_IMAGE_ASSOCIATED.$this->getLogo();
     }
 
     /**

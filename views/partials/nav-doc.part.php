@@ -32,6 +32,9 @@
             <li class="<?=(isActiveMenu("gallery")? "active":"");?> lien">            
                 <a href="<?=(isActiveMenu("gallery")? "#":"/gallery.php");?>">
                 <i class="fa fa-image sr-icons"></i> Galería</a></li>
+            <li class="<?=(isActiveMenu("associateds")? "active":"");?> lien">            
+                <a href="<?=(isActiveMenu("associateds")? "#":"/associateds.php");?>">
+                <i class="fa fa-hand-o-right sr-icons"></i> Asociados</a></li>
           </ul>
        </div>
      </div>

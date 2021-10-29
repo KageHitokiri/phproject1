@@ -78,6 +78,7 @@
    </div><!-- End of index box -->
 
 <?php
+
 include __DIR__ . "/partials/associated.part.php";
 include __DIR__ . "/partials/footer-doc.part.php";
 
