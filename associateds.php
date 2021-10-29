@@ -19,7 +19,7 @@
             $imageFile = new File('image',
                                        array('image/jpeg','image/jpg','image.png'),
                                        (2*(1024**2)));
-            $imageFile->saveUploadedFile(ImageGallery::PATH_IMAGE_GALLERY);
+            $imageFile->saveUploadedFile(Associated::PATH_IMAGE_ASSOCIATED);
             try {
                 $simpleImage = new \claviska\SimpleImage();
                 $simpleImage
@@ -38,15 +38,15 @@
             $imageError = true;
         }
         
-        $description = sanitizeInput(($_POST["description"] ?? ""));                    
-        if (empty($description)) {
-            $errors[] = "La descripción es obligatoria";
-            $descriptionError = true;
-        }
-
         $name = sanitizeInput(($_POST["name"] ?? ""));
         if (empty($name)) {
             $errors[] = "El nombre es obligatorio";
+            $descriptionError = true;
+        }
+
+        $description = sanitizeInput(($_POST["description"] ?? ""));                    
+        if (empty($description)) {
+            $errors[] = "La descripción es obligatoria";
             $descriptionError = true;
         }
 
@@ -62,6 +62,6 @@
               
     }
 
-    include("./views/gallery.view.php");
+    include("./views/associateds.view.php");
 
 ?>
