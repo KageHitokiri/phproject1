@@ -4,7 +4,7 @@
         <div class="partner-box text-center">
           <p>
           <i class="fa fa-map-marker fa-2x sr-icons"></i> 
-          <span class="text-muted">Calle falsa 123, Aukland (NZ)</span>
+          <span class="text-muted">Calle Falsa 123, Aukland (NZ)</span>
           </p>
           <h4>Our Main Partners</h4>
           <hr>
@@ -15,7 +15,8 @@
                     <li><img src="<?=$associated->getUrlAssociated()?>" alt="<?=$associated->getDescription()?>"></li>
                     <li><?=$associated->getName()?></li>
                 </ul>    
-            <?php endforeach;?>            
+            <?php endforeach;?>     
+
           </div>
         </div>
     </div>
