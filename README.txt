@@ -17,5 +17,3 @@ their respective owners.
 
 ######### CONTACT #########
 http://beauxthemes.com/contact
-
-Known bugs:
