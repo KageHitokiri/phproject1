@@ -13,8 +13,12 @@
     require_once "./exceptions/FileException.php";
     require_once "./utils/SimpleImage.php";
     require_once "./entity/ImagenGaleria.php";
-    
+    require_once "./database/Connection.php";
+    require_once "./database/QueryBuilder.php";
+
+    $connection = Connection::make();
     $info = $urlImagen = "";
+    $sql ="";
 
     $description = new TextareaElement();
     $description
@@ -62,12 +66,32 @@
               $urlImagen = ImagenGaleria::RUTA_IMAGENES_GALLERY . $file->getFileName();
               $form->reset();
             
+            $sql = "INSERT INTO imagenes (nombre, descripcion) VALUES (:nombre, :descripcion)";
+            
+            $pdoStatement = $connection->prepare($sql);
+            $params = [':nombre' => $file->getFileName(),
+                        ':descripcion' => $description->getValue()
+          ];
+
+            if (false === $pdoStatement->execute($params)) {
+              $form->addError("No se puede almacenar la imagen en la base de datos");              
+            } else {
+              $info = "La imagen se ha enviado correctamente";
+              $form->reset();
+            }
           }catch(Exception $err) {
               $form->addError($err->getMessage());
               $imagenErr = true;
           }
         }else{
           
-        }
+        }  
     }
+    $queryBuilder = new QueryBuilder($connection);
+    try {
+      $imagenes = $queryBuilder->findAll('imagenes','ImagenGaleria');
+    } catch (QueryException $qe) {
+      echo $qe->getMessage();
+    }
+
     include("./views/galeria.view.php");
