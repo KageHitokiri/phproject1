@@ -24,8 +24,25 @@
                 return $pdoStatement->fetchAll();
             } catch (\PDOException $pdoe) {
                 throw new QueryException("No se jha podido ejecutar la consulta solicitada: ".$pdoe->getMessage());
+            }                            
+        }
+
+        public function save(Entity $entity) {
+            try {
+                $params = $entity->toArray();
+                $sql = sprintf(
+                    'INSERT INTO %s (%s) values (%s)',
+                    $this->table,
+                    implode(', ', array_keys($params)),
+                    ':'.implode(', :', array_keys($params))
+                );
+
+                $statement = $this->connection->prepare($sql);
+                $statement->execute($params);
+
+            } catch (\PDOException $pdoe) {
+                throw new QueryException("Error al insertar en la base de datos: ".$pdoe->getMessage());
             }
-            
         }
         
     }

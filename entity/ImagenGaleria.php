@@ -1,5 +1,10 @@
 <?php
-class ImagenGaleria
+
+use function PHPSTORM_META\map;
+
+require_once __DIR__ .'/Entity.php';
+
+class ImagenGaleria extends Entity
 {
     const RUTA_IMAGENES_PORTFOLIO = 'images/index/portfolio/';
     const RUTA_IMAGENES_GALLERY = 'images/index/gallery/';
@@ -193,5 +198,17 @@ class ImagenGaleria
     public function getUrlGallery() : string
     {
         return self::RUTA_IMAGENES_GALLERY . $this->getNombre();
+    }
+
+    public function toArray(): array
+    {
+        return [
+            'id' => $this->getId(),
+            'nombre' => $this->getNombre(),
+            'descripcion' => $this->getDescripcion(),
+            'numVisualizaciones' => $this->getNumVisualizaciones(),
+            'numLikes' => $this->getNumLikes(),
+            'numDownloads' => $this->getNumDownloads()
+        ];
     }
 }
