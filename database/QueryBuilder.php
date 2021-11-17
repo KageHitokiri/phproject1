@@ -1,21 +1,26 @@
 <?php
     require_once __DIR__ .'/../exceptions/QueryException.php';
-    require_once "./database/Connection.php";
+    require_once __DIR__ ."/Connection.php";
+    require_once __DIR__ .'/../core/App.php';
 
     class QueryBuilder {
         private $connection;
+        private $table;
+        private $classEntity;
 
-        public function __construct() {
+        public function __construct(string $table, string $classEntity) {
             $this->connection = App::get('connection');
+            $this->table = $table;
+            $this->classEntity = $classEntity;
         }
 
-        public function findAll(string $table, string $classEntity) {
-            $sql = "SELECT * FROM $table";
+        public function findAll() {
+            $sql = "SELECT * FROM $this->table";
 
             try {
                 $pdoStatement = $this->connection->prepare($sql);
                 $pdoStatement->execute();
-                $pdoStatement->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, $classEntity);
+                $pdoStatement->setFetchMode(PDO::FETCH_CLASS |PDO::FETCH_PROPS_LATE, $this->classEntity);
                 return $pdoStatement->fetchAll();
             } catch (\PDOException $pdoe) {
                 throw new QueryException("No se jha podido ejecutar la consulta solicitada: ".$pdoe->getMessage());
