@@ -16,7 +16,9 @@
     require_once "./database/Connection.php";
     require_once "./database/QueryBuilder.php";
 
-    $connection = Connection::make();
+    $config = require_once 'app/config.php';
+    $connection = Connection::make($config['database']);
+    
     $info = $urlImagen = "";
     $sql ="";
 
