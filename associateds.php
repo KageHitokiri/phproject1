@@ -6,6 +6,13 @@
     require_once "./utils/File.php";
     require_once "./exceptions/FileException.php";
     require_once "./utils/SimpleImage.php";
+    require_once "./core/App.php";
+    require_once "./database/Connection.php";
+    require_once "./database/QueryBuilder.php";
+    $config = require_once 'app/config.php';
+    App::bind('config',$config);
+    App::bind('connection', Connection::make($config['database']));
+    $queryBuilder = new QueryBuilder();
 
     $info = $description = $logo = $name = "" ;
     $descriptionError = $imageError = $nameError = $thereAreErrors = false;

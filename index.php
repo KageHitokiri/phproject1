@@ -3,6 +3,15 @@
     require_once "./utils/utils.php";
     require_once "./entity/ImagenGaleria.php";
     require_once "./entity/Asociado.php";
+    require_once "./database/Connection.php";
+    require_once "./database/QueryBuilder.php";
+    require_once "./core/App.php";
+    
+    $config = require_once 'app/config.php';
+    App::bind('config',$config);
+    App::bind('connection', Connection::make($config['database']));
+    $queryBuilder = new QueryBuilder();
+
 
     $galeria[] = new ImagenGaleria("1.jpg", "Descripción imagen 1", 1, 5, 6);
     $galeria[] = new ImagenGaleria("2.jpg", "Descripción imagen 2", 3, 4, 5);
@@ -21,6 +30,6 @@
     $asociados[] = new Asociado("Second Partner Name", "log2.jpg", "Second Partner Name");
     $asociados[] = new Asociado("Third Partner Name", "log3.jpg", "Third Partner Name");
     $asociados[] = new Asociado("Fourth Partner Name", "log1.jpg", "Fourth Partner Name");
-    $asociados = getAsociados($asociados);
+    
 
     include("./views/index.view.php");

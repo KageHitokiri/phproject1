@@ -16,8 +16,7 @@
     require_once "./database/Connection.php";
     require_once "./database/QueryBuilder.php";
 
-    $config = require_once 'app/config.php';
-    $connection = Connection::make($config['database']);
+    require_once "./core/App.php";
     
     $info = $urlImagen = "";
     $sql ="";
@@ -51,6 +50,11 @@
     ->appendChild($descriptionWrapper)
     ->appendChild($b);
 
+    $config = require_once 'app/config.php';
+    App::bind('config',$config);
+    App::bind('connection', Connection::make($config['database']));
+    $queryBuilder = new QueryBuilder();
+    
     if ("POST" === $_SERVER["REQUEST_METHOD"]) {
         $form->validate();
         if (!$form->hasError()) {
@@ -89,10 +93,11 @@
           
         }  
     }
-    $queryBuilder = new QueryBuilder($connection);
+    
     try {
       $imagenes = $queryBuilder->findAll('imagenes','ImagenGaleria');
     } catch (QueryException $qe) {
+      $imagenes = [];
       echo $qe->getMessage();
     }
 
