@@ -24,6 +24,7 @@
                         <th scope="col">Visualizaciones</th>
                         <th scope="col">Likes</th>
                         <th scope="col">Descargas</th>
+                        <th scope="col">Categoría</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -39,6 +40,7 @@
                             <td><?= $imagen->getNumVisualizaciones(); ?></td>
                             <td><?= $imagen->getNumLikes(); ?></td>
                             <td><?= $imagen->getNumDownloads(); ?></td>
+                            <td><?= $repositorio->getCategoria($imagen)->getNombre(); ?></td>
                         </tr>
                     <?php endforeach; ?>
                     </tbody>

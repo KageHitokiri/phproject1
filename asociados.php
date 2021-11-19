@@ -21,7 +21,7 @@
     $config = require_once 'app/config.php';
     App::bind('config',$config);
     App::bind('connection', Connection::make($config['database']));
-    $queryBuilder = new QueryBuilder();
+    
 
     $info = $urlImagen = "";
 

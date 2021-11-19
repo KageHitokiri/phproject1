@@ -42,16 +42,18 @@ class ImagenGaleria extends Entity
 
     public function __construct(string $nombre = '', string $descripcion = '',
                                 int $numVisualizaciones = 0, int $numLikes = 0,
-                                int $numDownloads = 0){
+                                int $numDownloads = 0,
+                                int $categoria = 0){
         $this->id=null;
         $this->nombre = $nombre;
         $this->descripcion = $descripcion;
         $this->numVisualizaciones = $numVisualizaciones;
         $this->numLikes = $numLikes;
         $this->numDownloads = $numDownloads;
+        $this->categoria = $categoria;
 
     }
-    public function getId():int {
+    public function getId():?int{
         return $this->id;
     }
 
@@ -180,6 +182,15 @@ class ImagenGaleria extends Entity
         return $this;
     }
     
+    public function getCategoria(){
+        return $this->categoria;
+    }
+
+    public function setCategoria(int $categoria) {
+        $this->categoria = $categoria;
+        return $this;
+    }
+
     /**
      * Devuelve el path a las imágenes del portfolio
      *
@@ -208,7 +219,8 @@ class ImagenGaleria extends Entity
             'descripcion' => $this->getDescripcion(),
             'numVisualizaciones' => $this->getNumVisualizaciones(),
             'numLikes' => $this->getNumLikes(),
-            'numDownloads' => $this->getNumDownloads()
+            'numDownloads' => $this->getNumDownloads(),
+            'categoria' => $this->getCategoria()
         ];
     }
 }

@@ -10,7 +10,7 @@
         }
 
         public static function get(string $key) {
-            if (!array_key_exists($key, static::$container)) {
+            if (!array_key_exists($key, static::$container)) {                
                 throw new AppException("No se ha encontrado la clave $key en el contenedor");
             }
             return self::$container[$key];
