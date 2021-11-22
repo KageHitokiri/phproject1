@@ -130,10 +130,10 @@ class Mensaje extends Entity
         return [
             'id' => $this->getId(),
             'nombre' => $this->getNombre(),
-            'apellido' => $this->getApellido(),
-            'correo' => $this->getCorreo(),
+            'apellidos' => $this->getApellido(),
+            'email' => $this->getCorreo(),
             'asunto' => $this->getAsunto(),
-            'mensaje' => $this->getMensaje(),            
+            'texto' => $this->getMensaje(),            
         ];
     }
 }
