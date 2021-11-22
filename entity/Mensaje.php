@@ -4,10 +4,9 @@ use function PHPSTORM_META\map;
 
 require_once __DIR__ .'/Entity.php';
 
-class ImagenGaleria extends Entity
+class Mensaje extends Entity
 {
-    const RUTA_IMAGENES_PORTFOLIO = 'images/index/portfolio/';
-    const RUTA_IMAGENES_GALLERY = 'images/index/gallery/';
+    
     /**
      * Undocumented variable
      *
@@ -40,7 +39,7 @@ class ImagenGaleria extends Entity
     private $mensaje;    
 
     public function __construct(string $nombre = '', string $apellido = '',
-                                string $correo, int $asunto = 0, int $mensaje = 0)
+                                string $correo="", string $asunto = "", string $mensaje = "")
                                 {
         $this->id=null;
         $this->nombre = $nombre;

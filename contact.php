@@ -12,10 +12,14 @@
     require_once "./database/Connection.php";
     require_once "./database/QueryBuilder.php";
     require_once "./core/App.php";
+    require_once "./repository/MensajeRepository.php";
+    require_once "./entity/Mensaje.php";
+
 
     $config = require_once 'app/config.php';
     App::bind('config',$config);
     App::bind('connection', Connection::make($config['database']));
+    $repositorio = new MensajeRepository();
     
  
     $info = "";
@@ -71,6 +75,10 @@
         $form->validate();
         if (!$form->hasError()) {
           $info = "Mensaje insertado correctamente:";
+
+          $mensaje = new Mensaje($firstName->getValue(), $lastName->getValue(), $email->getValue(), $subject->getValue(), $message->getValue());
+          $repositorio->save($mensaje);
+
           $form->reset();
         }else{
           if ($firstName->hasError()) {
