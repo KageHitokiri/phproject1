@@ -53,6 +53,7 @@ class ImagenGaleria extends Entity
         $this->categoria = $categoria;
 
     }
+    
     public function getId():?int{
         return $this->id;
     }

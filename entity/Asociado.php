@@ -1,8 +1,15 @@
 <?php 
 
-class Asociado
+require_once __DIR__."/Entity.php";
+
+class Asociado extends Entity
 {
     const RUTA_IMAGENES_ASOCIADO = 'images/index/';
+    /**
+     * @var int
+     */
+    private $id;
+    
     /**
      * @var string
      */
@@ -19,14 +26,25 @@ class Asociado
     private $descripcion;
 
     /**
+     * @param int $id
      * @param string $nombre
      * @param string $logo
      * @param string $descripcion
      */
-    public function __construct(string $nombre, string $logo, string $descripcion = ""){
+    public function __construct(string $nombre ="", string $logo = "", string $descripcion = ""){
+        $this->id=null;
         $this->nombre = $nombre;
         $this->logo = $logo;
         $this->descripcion = $descripcion;
+    }
+
+    public function getId():?int{
+        return $this->id;
+    }
+
+    public function setId(int $id) {
+        $this->id = $id;
+        return $this;
     }
 
     /**
@@ -110,4 +128,15 @@ class Asociado
     {
         return self::RUTA_IMAGENES_ASOCIADO . $this->getLogo();
     }
+
+    public function toArray(): array
+    {
+        return [
+            'id' => $this->getId(),
+            'logo' => $this->getLogo(),
+            'nombre' => $this->getNombre(),
+            'descripcion' => $this->getDescripcion()            
+        ];
+    }
+
 }

@@ -17,11 +17,13 @@
     require_once "./database/Connection.php";
     require_once "./database/QueryBuilder.php";
     require_once "./core/App.php";
-    
+    require_once "./repository/AsociadoRepository.php";
+
     $config = require_once 'app/config.php';
     App::bind('config',$config);
     App::bind('connection', Connection::make($config['database']));
     
+    $repositorio = new AsociadoRepository();
 
     $info = $urlImagen = "";
 
@@ -74,6 +76,12 @@
               ->toFile(Asociado::RUTA_IMAGENES_ASOCIADO . $file->getFileName());
               $info = 'Imagen enviada correctamente'; 
               $urlImagen = Asociado::RUTA_IMAGENES_ASOCIADO . $file->getFileName();
+              
+              //public function __construct(string $nombre ="", string $logo, string $descripcion = ""){
+
+              $asociado = new Asociado($nombre->getValue(), $file->getFileName(), $description->getValue());
+              $repositorio->save($asociado);
+
               $form->reset();
             
           }catch(Exception $err) {
@@ -82,6 +90,12 @@
           }
         }else{
           
+        }
+
+        try {
+          $asociados = $repositorio->findAll();      
+        } catch (QueryException $qe) {
+          $asociados = [];      
         }
     }    
     include("./views/asociados.view.php");

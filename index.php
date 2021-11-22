@@ -7,7 +7,8 @@
     require_once "./database/QueryBuilder.php";
     require_once "./core/App.php";
     require_once "./repository/ImagenGaleriaRepository.php";
-    
+    require_once "./repository/AsociadoRepository.php";
+
     $config = require_once 'app/config.php';
     App::bind('config',$config);
     App::bind('connection', Connection::make($config['database']));
@@ -15,10 +16,7 @@
     $repositorio = new ImagenGaleriaRepository();
     $galeria = $repositorio->findAll();
 
-    $asociados[] = new Asociado("First Partner Name", "log1.jpg", "First Partner Name");
-    $asociados[] = new Asociado("Second Partner Name", "log2.jpg", "Second Partner Name");
-    $asociados[] = new Asociado("Third Partner Name", "log3.jpg", "Third Partner Name");
-    $asociados[] = new Asociado("Fourth Partner Name", "log1.jpg", "Fourth Partner Name");
-    
+    $repositorio = new AsociadoRepository();
+    $asociados = $repositorio->findAll();    
 
     include("./views/index.view.php");
