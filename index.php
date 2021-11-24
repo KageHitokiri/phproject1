@@ -4,7 +4,6 @@
     require_once "./entity/ImagenGaleria.php";
     require_once "./entity/Asociado.php";
     require_once "./database/Connection.php";
-    require_once "./database/QueryBuilder.php";
     require_once "./core/App.php";
     require_once "./repository/ImagenGaleriaRepository.php";
     require_once "./repository/AsociadoRepository.php";
@@ -18,5 +17,7 @@
 
     $repositorio = new AsociadoRepository();
     $asociados = $repositorio->findAll();    
+    $asociados = getAsociados($asociados);
+
 
     include("./views/index.view.php");
