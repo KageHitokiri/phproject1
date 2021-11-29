@@ -17,6 +17,7 @@
     require_once "./database/Connection.php";
     require_once "./repository/UsuarioRepository.php";
     require_once "./core/App.php";
+    require_once "./exceptions/NotFoundException.php";
 
     $config = require_once 'app/config.php';
     App::bind('config', $config);
@@ -31,73 +32,38 @@
       ->setId('username');
 
     $nombreUsuario->setValidator(new NotEmptyValidator('El nombre de usuari@ no puede estar vacío', true));
-    $userWrapper = new MyFormControl($nombreUsuario, 'Nombre de usuari@', 'col-xs-12');
-    $email = new EmailElement();
-
-    $email
-      ->setName('email')
-      ->setId('email');
-
-    $emailWrapper = new MyFormControl($email, 'Correo electrónico', 'col-xs-12');
-    $pv = new NotEmptyValidator('La contraseña no puede estar vacía', true);
+    $userWrapper = new MyFormControl($nombreUsuario, 'Nombre de usuari@', 'col-xs-12');    
     $pass = new PasswordElement();
     
     $pass
     ->setName('password')
-    ->setId('password');   
-    $pass->setValidator($pv);
+    ->setId('password');       
 
     $passWrapper = new MyFormControl($pass, 'Contraseña', 'col-xs-12');
-    $repite = new PasswordElement();
-
-    $repite
-    ->setName('repite_password')
-    ->setId('repite_password');
-    $repite->setValidator(new PasswordMatchValidator($pass, 'Las contraseñas no coinciden', true));
-
-    $repiteWrapper = new MyFormControl($repite, 'Repita la contraseña', 'col-xs-12');    
+    
     $b = new ButtonElement('Registro', '', '', 'pull-right btn btn-lg sr-button');
     $form = new FormElement();
 
     $form
-      ->appendChild($userWrapper)
-      ->appendChild($emailWrapper)
-      ->appendChild($passWrapper)
-      ->appendChild($repiteWrapper)
+      ->appendChild($userWrapper)      
+      ->appendChild($passWrapper)      
       ->appendChild($b);
 
     if ("POST" === $_SERVER['REQUEST_METHOD']) {
         $form->validate();
         if(!$form->hasError()) {
             try{
-                $usuario = new Usuario($nombreUsuario->getValue(), $email->getValue(), $pass->getValue());
-                $repositorio->save($usuario);
-                $_SESSION['username'] = $nombreUsuario->getValue();
+                $usuario = $repositorio->findByUserNameAndPassword($nombreUsuario->getValue(), $pass->getValue());
+                $_SESSION['username'] = $usuario->getUsername();
                 header('location: /');
-
             } catch (QueryException $qe){
-                $exception = $qe->getMessage();
-                $error = false;
-                if ((strpos($exception, "1062") !== false)) {
-                  if ((strpos($exception, "username") !== false)) {
-                    $error = true;
-                    $form->addError("Ya existe un usuario registrado con ese nombre de usuario");
-                  } 
-                  if ((strpos($exception, "email") !== false)) {
-                    $error = true;
-                    $form->addError("Ya existe un usuario registrado con dicho correo electrónico");
-                  }
-                  if (!$error) {
-                    $form->addError($exception);
-                  }
-                                       
-                } else {
-                  $form->addError($exception);
-                }
+                $form->addError($qe->getMessage());
+            } catch (NotFoundException $err){
+                $form->addError($err->getMessage());                
             } catch (Exception $err) {
                 $form->addError($err->getMessage());
             }
         }
     }
 
-    include("./views/register.view.php");
+    include("./views/login.view.php");

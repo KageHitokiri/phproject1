@@ -34,3 +34,4 @@ function getAsociados(array $asociados): array{
     shuffle($asociados);
     return array_slice($asociados,0, 3);
 }
+

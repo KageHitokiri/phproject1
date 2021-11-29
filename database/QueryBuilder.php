@@ -5,9 +5,9 @@
 
 
     abstract class QueryBuilder {
-        private $connection;
-        private $table;
-        private $classEntity;
+        protected $connection;
+        protected $table;
+        protected $classEntity;
 
         public function __construct(string $table, string $classEntity) {
             $this->connection = App::get('connection');
@@ -102,5 +102,7 @@
                 throw new QueryException("Error al actualizar el elemento con id {$params['id']}: ".$pdoe->getMessage());                
             }
         }
+
+
 
     }

@@ -1,4 +1,5 @@
 <?php
+    session_start();
     $title = "Single post";
     require_once "./utils/utils.php";
     require_once "./core/App.php";
