@@ -17,13 +17,13 @@
     require_once "./database/Connection.php";
     require_once "./repository/UsuarioRepository.php";
     require_once "./core/App.php";
-    require_once "./security/PlainPasswordGenerator.php";
+    require_once "./security/Argon2PasswordGenerator.php";
 
     $config = require_once 'app/config.php';
     App::bind('config', $config);
     App::bind('connection', Connection::make($config['database']));
 
-    $repositorio = new UsuarioRepository(new PlainPasswordGenerator());
+    $repositorio = new UsuarioRepository(new Argon2PasswordGenerator());
     $info = "";
     $nombreUsuario = new InputElement('text');
 
